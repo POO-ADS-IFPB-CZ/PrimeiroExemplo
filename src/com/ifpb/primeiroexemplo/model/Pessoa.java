@@ -1,6 +1,7 @@
 package com.ifpb.primeiroexemplo.model;
 
 import java.time.LocalDate;
+import java.time.Period;
 
 public class Pessoa {
 
@@ -13,14 +14,16 @@ public class Pessoa {
     private String rg;
     private String nome;
     private LocalDate nascimento;
+    private Endereco endereco;
 
     public Pessoa(String cpf, String rg, String nome,
-                  LocalDate nascimento){
+                  LocalDate nascimento, Endereco endereco){
         ID = ++contPessoa;
         this.cpf = cpf;
         this.rg = rg;
         this.nome = nome;
         this.nascimento = nascimento;
+        this.endereco = endereco;
     }
 
     public Pessoa() {
@@ -65,6 +68,21 @@ public class Pessoa {
 
     public void setNascimento(LocalDate nascimento){
         this.nascimento = nascimento;
+    }
+
+    public Endereco getEndereco(){
+        return endereco;
+    }
+
+    public void setEndereco(Endereco endereco){
+        this.endereco = endereco;
+    }
+
+    public int getIdade(){
+        Period period = Period.between(nascimento,
+                LocalDate.now());
+
+        return period.getYears();
     }
 
 }
